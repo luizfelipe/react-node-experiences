@@ -9,7 +9,7 @@ let montarResposta = function(err, res, operacao, objeto) {
         res.status(400).send(getMensagemErro(operacao), err);
     }
     else {
-        res.status(200).json(obj);
+        res.status(200).json(objeto);
     }
 };
 
@@ -19,7 +19,7 @@ module.exports = {
 
         tarefa.save()
             .then(tarefa => res.status(200).json(tarefa))
-            .cath(err => {
+            .catch(err => {
                 res.status(400).send(getMensagemErro('adicionar tarefa'), err)
             });
     },
@@ -31,20 +31,20 @@ module.exports = {
     },
 
     buscar: function(req, res) {
-        Tarefa.findById(req.parans.id, function(err, tarefa) {
-            montarResposta(err, res, 'buscar tarefa ' + req.parans.id, tarefa);
+        Tarefa.findById(req.params.id, function(err, tarefa) {
+            montarResposta(err, res, 'buscar tarefa ' + req.params.id, tarefa);
         });
     },
 
     remover: function(req, res) {
-        Tarefa.findByIdAndRemove(req.parans.id, function(err) {
-            montarResposta(err, res, 'remover tarefa ' + req.parans.id, req.parans.id);
+        Tarefa.findByIdAndRemove(req.params.id, function(err, tarefa) {
+            montarResposta(err, res, 'remover tarefa ' + req.params.id, tarefa);
         });
     },
 
-    atualizar: function(req, res) {
-        Tarefa.findByIdAndUpdate(req.parans.id, req.body, { new: true }, function(err, task) {
-            montarResposta(err, res, 'atualizar tarefa ' + req.parans.id, tarefa);
+    alterar: function(req, res) {
+        Tarefa.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, tarefa) {
+            montarResposta(err, res, 'atualizar tarefa ' + req.params.id, tarefa);
         });
     },
 };
