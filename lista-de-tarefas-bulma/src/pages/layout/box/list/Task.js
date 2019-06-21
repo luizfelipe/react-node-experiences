@@ -1,23 +1,23 @@
-import React, {Component} from 'React';
+import React, {Component} from 'react';
 
 import TextInput from '../../../../components/TextInput';
-import DoneButton from './Task/DoneButton';
-import EditButton from './Task/EditButton';
+import DoneButton from './task/DoneButton';
+import EditButton from './task/EditButton';
 
 class Task extends Component {
     render () {
         return (
             <div className="box">
-                <div className="column is-mobile">
+                <div className="columns is-mobile">
 
                     <div className="column is-1 is-centered">
                         <DoneButton />
                     </div>
                     <div className="column is-9">
-                        <TextInput name={titulo} className="is-shadowless" /> 
+                        <TextInput name="titulo" className="is-shadowless" value="Primeira Tarefa de Teste" /> 
                     </div>
                     <div  className="column is-2 is-centered">
-                        <EditButton />
+                        <EditButton _id="1" />
                     </div>
 
                 </div>
@@ -25,3 +25,5 @@ class Task extends Component {
         );
     };
 };
+
+export default Task;

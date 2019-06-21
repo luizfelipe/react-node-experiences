@@ -1,6 +1,6 @@
-import React, {Fragment} from 'React';
+import React, {Fragment} from 'react';
 
-import { FontAwesomeIcon } from '@fonteawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DoneButton = () => {
     return (
