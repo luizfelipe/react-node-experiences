@@ -12,6 +12,12 @@ import { faSyncAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 // Components
 import Layout from './pages/Layout';
 
+import store from './store';
+import { adicionarTarefa } from './actions/taskActions';
+
+window.store = store;
+window.addTask = adicionarTarefa;
+
 library.add(faCircle, faPlus);
 
 render(
