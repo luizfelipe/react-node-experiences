@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -16,12 +17,14 @@ import store from './store';
 import { adicionarTarefa } from './actions/taskActions';
 
 window.store = store;
-window.addTask = adicionarTarefa;
+window.adicionarTarefa = adicionarTarefa;
 
 library.add(faCircle, faPlus);
 
 render(
-    <Layout />, 
+    <Provider store={store}>
+        <Layout />
+    </Provider>, 
     document.getElementById('root')
 );
 

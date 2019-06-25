@@ -1,18 +1,29 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import CreateButton from './list/CreateButton';
 import MenuTab from './list/MenuTab';
 import Task from './list/Task';
 
+const mapStatetoProps = (state) => {
+    return{ tarefas: state.tarefas };        
+};
+
 class List extends Component {
+
     render () {
+
+        const {tarefas} = this.props;
+
         return (
             <div>
                 <CreateButton />
-                <MenuTab />
+                <MenuTab tarefas={tarefas} />
                 <div className="is-task-list">
                     <div>
-                        <Task />
+                        {tarefas.map(tarefa => (
+                            <Task tarefa={tarefa} />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -20,4 +31,4 @@ class List extends Component {
     };
 };
 
-export default List;
+export default connect(mapStatetoProps)(List);

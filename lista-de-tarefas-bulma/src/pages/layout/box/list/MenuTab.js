@@ -2,18 +2,21 @@ import React from 'react';
 
 import Tab from './menuTab/Tab';
 
-const MenuTab = () => {
+const MenuTab = ({tarefas}) => {
+
+    const numeroTarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida).length;
+
     return (
         <div className="tabs is-fullwidth has-text-weight-bold">
             <ul>
                 <Tab 
                     text="Abertas" 
-                    quantity={1} 
+                    quantity={tarefas.length - numeroTarefasConcluidas} 
                     className={'is-active'} 
                 />
                 <Tab
                     text="Concluídas" 
-                    quantity={0} 
+                    quantity={numeroTarefasConcluidas} 
                     className={''}
                 />
             </ul>

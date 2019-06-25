@@ -5,7 +5,18 @@ import DoneButton from './task/DoneButton';
 import EditButton from './task/EditButton';
 
 class Task extends Component {
+
+    constructor(props) {
+        super();
+        this.state = {
+            tarefa: props.tarefa
+        }
+    }
+
     render () {
+
+        const tarefa = this.state.tarefa;
+
         return (
             <div className="box">
                 <div className="columns is-mobile">
@@ -14,10 +25,10 @@ class Task extends Component {
                         <DoneButton />
                     </div>
                     <div className="column is-9">
-                        <TextInput name="titulo" className="is-shadowless" value="Primeira Tarefa de Teste" /> 
+                        <TextInput name="titulo" className="is-shadowless" value={tarefa.titulo} /> 
                     </div>
                     <div  className="column is-2 is-centered">
-                        <EditButton _id="1" />
+                        <EditButton _id={tarefa._id} />
                     </div>
 
                 </div>
