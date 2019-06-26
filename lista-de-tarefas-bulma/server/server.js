@@ -6,18 +6,21 @@ const config = require('./config/keys.config.js')
 
 const TarefaRoutes = require('./routes/TarefaRouter');
 
-//const cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 
+/* { useNewUrlParser: true } To prevent MongoDb DepreciationWarning */
 mongoose.connect(config.mongodbURI, { useNewUrlParser: true })
     .then(() => console.log('Base de Dados conectada!'))
     .catch((err) => console.log('Erro na conexão com a basse de dados', err));
 
-app.use(bodyParser.json());
-app.use('/api/tarefas', TarefaRoutes);
+/* To prevent MongoDb DepreciationWarning */
+mongoose.set('useFindAndModify', false);
 
-//app.use(cors);
+app.use(bodyParser.json());
+app.use(cors());
+app.use('/api/tarefas', TarefaRoutes);
 
 const port = process.env.PORT || 3001;
 

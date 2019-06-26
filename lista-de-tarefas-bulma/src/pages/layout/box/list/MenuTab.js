@@ -1,8 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { alterarFiltroTarefasConcluidas } from '../../../../actions/taskActions';
 
 import Tab from './menuTab/Tab';
 
-const MenuTab = ({tarefas}) => {
+const mapStateToProps = (state) => {
+    return { 
+        tarefas: state.tarefas,
+        filtroConcluidas: state.filtroConcluidas,
+    };        
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return { 
+        alterarFiltroTarefasConcluidas: (ativo) => dispatch(alterarFiltroTarefasConcluidas(ativo)) 
+    };        
+};
+
+const MenuTab = ({ tarefas, filtroConcluidas, alterarFiltroTarefasConcluidas }) => {
 
     const numeroTarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida).length;
 
@@ -12,16 +28,18 @@ const MenuTab = ({tarefas}) => {
                 <Tab 
                     text="Abertas" 
                     quantity={tarefas.length - numeroTarefasConcluidas} 
-                    className={'is-active'} 
+                    className={filtroConcluidas ? '' : 'is-active'} 
+                    onClick={() => alterarFiltroTarefasConcluidas(false)}
                 />
                 <Tab
                     text="Concluídas" 
                     quantity={numeroTarefasConcluidas} 
-                    className={''}
+                    className={filtroConcluidas ? 'is-active' : ''}
+                    onClick={() => alterarFiltroTarefasConcluidas(true)}
                 />
             </ul>
         </div>
     );
 };
 
-export default MenuTab;
+export default connect(mapStateToProps, mapDispatchToProps)(MenuTab);

@@ -6,26 +6,35 @@ import EditButton from './task/EditButton';
 
 class Task extends Component {
 
-    constructor(props) {
+    constructor() {
         super();
+
         this.state = {
-            tarefa: props.tarefa
+            titulo: '',
+        };
+    }
+
+    componentDidMount() {
+        const { tarefa } = this.props;
+
+        if (tarefa) {
+            this.setState(tarefa);
         }
     }
 
     render () {
 
-        const tarefa = this.state.tarefa;
+        const { tarefa } = this.props;
 
         return (
-            <div className="box">
+            <div className="box" key={tarefa._id}>
                 <div className="columns is-mobile">
 
                     <div className="column is-1 is-centered">
-                        <DoneButton />
+                        <DoneButton tarefa={tarefa} />
                     </div>
                     <div className="column is-9">
-                        <TextInput name="titulo" className="is-shadowless" value={tarefa.titulo} /> 
+                        <TextInput id={tarefa._id} name="titulo" value={tarefa.titulo} className="is-shadowless" /> 
                     </div>
                     <div  className="column is-2 is-centered">
                         <EditButton _id={tarefa._id} />
