@@ -11,7 +11,7 @@ const Box = () => {
                 <Switch>
                     <Route exact path="/" component={List} />
                     <Route path="/adicionar" component={Form} />
-                    <Route path="/alterar:id" component={Form} />
+                    <Route path="/alterar/:id" component={Form} />
                 </Switch>
             </BrowserRouter>
         </div>
